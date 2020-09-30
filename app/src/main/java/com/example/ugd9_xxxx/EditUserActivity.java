@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class EditUserActivity extends AppCompatActivity {
     private EditText etNama, etNim, etUsername, etPassword;
     private AutoCompleteTextView exposedDropdownFakultas, exposedDropdownProdi;
     private RadioGroup rgJenisKelamin;
+    private RadioButton rbLaki, rbPerempuan;
     private MaterialButton btnCancel, btnUpdate;
     private String sIdUser, sName, sNim, sProdi, sFakultas, sJenisKelamin;
     private String[] saProdi = new String[] {"Informatika", "Manajemen", "Ilmu Komunikasi", "Ilmu Hukum"};
@@ -54,6 +56,8 @@ public class EditUserActivity extends AppCompatActivity {
         exposedDropdownProdi = findViewById(R.id.edProdi);
         exposedDropdownFakultas = findViewById(R.id.edFakultas);
         rgJenisKelamin = findViewById(R.id.rgJenisKelamin);
+        rbLaki = findViewById(R.id.rbLakiLaki);
+        rbPerempuan = findViewById(R.id.rbPerempuan);
         etPassword = findViewById(R.id.etPassword);
         btnCancel = findViewById(R.id.btnCancel);
         btnUpdate = findViewById(R.id.btnUpdate);
@@ -73,12 +77,12 @@ public class EditUserActivity extends AppCompatActivity {
                 R.id.item_list, saProdi);
         exposedDropdownProdi.setAdapter(adapterProdi);
 
-//        spPetType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                idPetType = nameListPetType.indexOf(spPetType.getText().toString());
-//            }
-//        });
+
+        for (int j = 0; j < saProdi.length; j++) {
+            if(saProdi[j]==sProdi){
+                exposedDropdownProdi.setText("hapie");
+            }
+        }
 
         exposedDropdownProdi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -89,6 +93,12 @@ public class EditUserActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapterFakultas = new ArrayAdapter<>(Objects.requireNonNull(this), R.layout.list_item, R.id.item_list, saFakultas);
         exposedDropdownFakultas.setAdapter(adapterFakultas);
+
+        for (int j = 0; j < saFakultas.length; j++) {
+            if(saFakultas[j]==sFakultas){
+                exposedDropdownFakultas.setText("hapie");
+            }
+        }
 
         exposedDropdownFakultas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,6 +114,16 @@ public class EditUserActivity extends AppCompatActivity {
             }
         });
 
+        runOnUiThread(new Runnable() {
+            public void run() {
+                if (sJenisKelamin.equalsIgnoreCase("laki-laki")) {
+                    rbLaki.setChecked(true);
+                }
+                else {
+                    rbPerempuan.setChecked(true);
+                }
+            }
+        });
         rgJenisKelamin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -163,9 +183,11 @@ public class EditUserActivity extends AppCompatActivity {
         add.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Toast.makeText(EditUserActivity.this, "Sukses menupdate user", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditUserActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 onBackPressed();
+                Intent i = new Intent(EditUserActivity.this, ShowListUserActivity.class);
+                startActivity(i);
             }
 
             @Override

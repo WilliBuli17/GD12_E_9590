@@ -2,6 +2,7 @@ package com.example.ugd9_xxxx;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -30,6 +31,9 @@ public class ShowListUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
         setContentView(R.layout.activity_show_list_user);
 
         ibBack = findViewById(R.id.ibBack);

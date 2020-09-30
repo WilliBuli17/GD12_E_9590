@@ -5,6 +5,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -20,12 +21,14 @@ public interface ApiInterface {
                                   @Field("jenis_kelamin") String jenis_kelamin,
                                   @Field("password") String password);
 
-    @POST("user/update")
+    @POST("user/update/{id}")
     @FormUrlEncoded
-    Call<UserResponse> updateUser(@Field("id") String id,
+    Call<UserResponse> updateUser(@Path("id")String id,
                                   @Field("nama") String nama,
                                   @Field("prodi") String prodi,
                                   @Field("fakultas") String fakultas,
                                   @Field("jenis_kelamin") String jenis_kelamin,
                                   @Field("password") String password);
+    @POST("user/delete/{id}")
+    Call<UserResponse> deleteUser(@Path("id")String id);
 }

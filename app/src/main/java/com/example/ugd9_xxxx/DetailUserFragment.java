@@ -1,5 +1,6 @@
 package com.example.ugd9_xxxx;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,12 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.button.MaterialButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailUserFragment extends DialogFragment {
     private TextView twNama, twNim, twFakultas, twProdi, twJenisKelamin;
@@ -68,7 +75,8 @@ public class DetailUserFragment extends DialogFragment {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AlertDialog diaBox = KonfirmasiHapus();
+                diaBox.show();
             }
         });
 
@@ -88,5 +96,44 @@ public class DetailUserFragment extends DialogFragment {
 
         return v;
     }
+    private AlertDialog KonfirmasiHapus()
+    {
+        AlertDialog diaBox = new AlertDialog.Builder(getContext())
+                // set message, title, and icon
+                .setTitle("Konfirmasi")
+                .setMessage("Yakin ingin menghapus data ini?")
 
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+                        Call<UserResponse> delete = apiService.deleteUser(sIdUser);
+
+                        delete.enqueue(new Callback<UserResponse>() {
+                            @Override
+                            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getContext(), ShowListUserActivity.class);
+                                startActivity(i);
+                            }
+
+                            @Override
+                            public void onFailure(Call<UserResponse> call, Throwable t) {
+                                Toast.makeText(getContext(), "Gagal menghapus user", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        return diaBox;
+    }
 }
