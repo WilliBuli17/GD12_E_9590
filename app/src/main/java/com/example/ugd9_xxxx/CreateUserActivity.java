@@ -27,7 +27,7 @@ public class CreateUserActivity extends AppCompatActivity {
     private AutoCompleteTextView exposedDropdownFakultas, exposedDropdownProdi;
     private RadioGroup rgJenisKelamin;
     private MaterialButton btnCancel, btnCreate;
-    private String sProdi = "", sFakultas = "", sJenisKelamin, sUsername;
+    private String sProdi = "", sFakultas = "", sJenisKelamin;
     private String[] saProdi = new String[] {"Informatika", "Manajemen", "Ilmu Komunikasi", "Ilmu Hukum"};
     private String[] saFakultas = new String[] {"FTI", "FBE", "FISIP", "FH"};
     private ProgressDialog progressDialog;
@@ -53,7 +53,6 @@ public class CreateUserActivity extends AppCompatActivity {
         exposedDropdownProdi = findViewById(R.id.edProdi);
         exposedDropdownFakultas = findViewById(R.id.edFakultas);
         rgJenisKelamin = findViewById(R.id.rgJenisKelamin);
-        etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnCancel = findViewById(R.id.btnCancel);
         btnCreate = findViewById(R.id.btnCreate);
@@ -122,11 +121,6 @@ public class CreateUserActivity extends AppCompatActivity {
                     exposedDropdownFakultas.setError("Isikan dengan benar", null);
                     exposedDropdownFakultas.requestFocus();
                 }
-                else if(etUsername.getText().toString().isEmpty())
-                {
-                    etUsername.setError("Isikan dengan benar");
-                    etUsername.requestFocus();
-                }
                 else if(etPassword.getText().toString().isEmpty())
                 {
                     etPassword.setError("Isikan dengan benar");
@@ -143,19 +137,19 @@ public class CreateUserActivity extends AppCompatActivity {
 
     private void saveUser() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<UserDAO> add = apiService.createUser(etNama.getText().toString(), etNim.getText().toString(), sProdi, sFakultas, sJenisKelamin,
-                etUsername.getText().toString(), etPassword.getText().toString());
+        Call<UserResponse> add = apiService.createUser(etNama.getText().toString(), etNim.getText().toString(), sProdi, sFakultas, sJenisKelamin,
+                etPassword.getText().toString());
 
-        add.enqueue(new Callback<UserDAO>() {
+        add.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<UserDAO> call, Response<UserDAO> response) {
-                Toast.makeText(CreateUserActivity.this, "Sukses menambah user", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                Toast.makeText(CreateUserActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 onBackPressed();
             }
 
             @Override
-            public void onFailure(Call<UserDAO> call, Throwable t) {
+            public void onFailure(Call<UserResponse> call, Throwable t) {
                 Toast.makeText(CreateUserActivity.this, "Gagal menambah user", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }

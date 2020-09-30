@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.material.button.MaterialButton;
 
 public class DetailUserFragment extends DialogFragment {
-    private TextView twNama, twNim, twFakultas, twProdi, twJenisKelamin, twUsername;
+    private TextView twNama, twNim, twFakultas, twProdi, twJenisKelamin;
     private String sIdUser, sNama, sNim, sFakultas, sProdi, sJenisKelamin, sUsername;
     private ImageButton ibClose;
     private MaterialButton btnDelete, btnEdit;
@@ -48,7 +48,6 @@ public class DetailUserFragment extends DialogFragment {
         twFakultas = v.findViewById(R.id.twFakultas);
         twProdi = v.findViewById(R.id.twProdi);
         twJenisKelamin = v.findViewById(R.id.twJenisKelamin);
-        twUsername = v.findViewById(R.id.twUsername);
         btnDelete = v.findViewById(R.id.btnDelete);
         btnEdit = v.findViewById(R.id.btnEdit);
 
@@ -65,7 +64,6 @@ public class DetailUserFragment extends DialogFragment {
         twFakultas.setText(sFakultas);
         twProdi.setText(sProdi);
         twJenisKelamin.setText(sJenisKelamin);
-        twUsername.setText(sUsername);
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +82,6 @@ public class DetailUserFragment extends DialogFragment {
                 i.putExtra("prodi",sProdi);
                 i.putExtra("fakultas",sFakultas);
                 i.putExtra("jenis_kelamin",sJenisKelamin);
-                i.putExtra("username",sUsername);
                 startActivity(i);
             }
         });

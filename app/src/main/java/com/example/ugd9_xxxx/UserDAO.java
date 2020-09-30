@@ -1,16 +1,36 @@
 package com.example.ugd9_xxxx;
 
-public class UserDAO {
-    String id, nama, nim, prodi, fakultas, jenis_kelamin, username, password;
+import com.google.gson.annotations.SerializedName;
 
-    public UserDAO(String id, String nama, String nim, String prodi, String fakultas, String jenis_kelamin, String username, String password) {
+public class UserDAO {
+    @SerializedName("id")
+    private String id;
+
+    @SerializedName("nama")
+    private String nama;
+
+    @SerializedName("nim")
+    private String nim;
+
+    @SerializedName("prodi")
+    private String prodi;
+
+    @SerializedName("fakultas")
+    private String fakultas;
+
+    @SerializedName("jenis_kelamin")
+    private String jenis_kelamin;
+
+    @SerializedName("password")
+    private String password;
+
+    public UserDAO(String id, String nama, String nim, String prodi, String fakultas, String jenis_kelamin, String password) {
         this.id = id;
         this.nama = nama;
         this.nim = nim;
         this.prodi = prodi;
         this.fakultas = fakultas;
         this.jenis_kelamin = jenis_kelamin;
-        this.username = username;
         this.password = password;
     }
 
@@ -36,10 +56,6 @@ public class UserDAO {
 
     public String getJenis_kelamin() {
         return jenis_kelamin;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getPassword() {
@@ -68,10 +84,6 @@ public class UserDAO {
 
     public void setJenis_kelamin(String jenis_kelamin) {
         this.jenis_kelamin = jenis_kelamin;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setPassword(String password) {

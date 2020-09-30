@@ -5,10 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DataResponse {
+public class UserResponse {
     @SerializedName("data")
     @Expose
-    private List<UserDAO> users = null;
+    private List<UserDAO> users;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
 
     public List<UserDAO> getUsers() {
         return users;
@@ -16,5 +20,13 @@ public class DataResponse {
 
     public void setUsers(List<UserDAO> users) {
         this.users = users;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

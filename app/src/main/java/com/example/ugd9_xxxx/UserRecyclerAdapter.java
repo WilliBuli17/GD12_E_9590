@@ -63,7 +63,6 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
                 args.putString("fakultas", brg.getFakultas());
                 args.putString("prodi", brg.getProdi());
                 args.putString("jenis_kelamin", brg.getJenis_kelamin());
-                args.putString("username", brg.getUsername());
                 dialog.setArguments(args);
             }
         });
