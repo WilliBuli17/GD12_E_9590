@@ -41,10 +41,24 @@ public class LoginActivity extends AppCompatActivity {
                     userDAOCall.enqueue(new Callback<UserResponse>() {
                         @Override
                         public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                            if(response.body().getMessage().equalsIgnoreCase("berhasil login")){
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                finish();
+                            if(response.body().getMessage().equalsIgnoreCase("berhasil login" )){
+                                if(response.body().getUsers().get(0).getNama().equalsIgnoreCase("admin")){
+                                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    finish();
+                                }else{
+                                    UserDAO user = response.body().getUsers().get(0);
+                                    Intent i = new Intent(LoginActivity.this, UserProfileActivity.class);
+                                    i.putExtra("id",user.getId());
+                                    i.putExtra("name",user.getNama());
+                                    i.putExtra("nim",user.getNim());
+                                    i.putExtra("prodi",user.getProdi());
+                                    i.putExtra("fakultas",user.getFakultas());
+                                    i.putExtra("jenis_kelamin",user.getJenis_kelamin());
+                                    startActivity(i);
+                                    finish();
+                                    Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else
                                 Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();

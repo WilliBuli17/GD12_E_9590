@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class DetailUserFragment extends DialogFragment {
     private TextView twNama, twNim, twFakultas, twProdi, twJenisKelamin;
-    private String sIdUser, sNama, sNim, sFakultas, sProdi, sJenisKelamin, sUsername;
+    private String sIdUser, sNama, sNim, sFakultas, sProdi, sJenisKelamin;
     private ImageButton ibClose;
     private MaterialButton btnDelete, btnEdit;
 
@@ -64,7 +64,6 @@ public class DetailUserFragment extends DialogFragment {
         sFakultas = getArguments().getString("fakultas", "");
         sProdi = getArguments().getString("prodi", "");
         sJenisKelamin = getArguments().getString("jenis_kelamin", "");
-        sUsername = getArguments().getString("username", "");
 
         twNama.setText(sNama);
         twNim.setText(sNim);
