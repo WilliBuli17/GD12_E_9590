@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class CreateUserActivity extends AppCompatActivity {
     private ImageButton ibBack;
-    private EditText etNama, etNim, etUsername, etPassword;
+    private EditText etNama, etNim, etPassword;
     private AutoCompleteTextView exposedDropdownFakultas, exposedDropdownProdi;
     private RadioGroup rgJenisKelamin;
     private MaterialButton btnCancel, btnCreate;

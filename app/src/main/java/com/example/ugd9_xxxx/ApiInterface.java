@@ -12,6 +12,11 @@ public interface ApiInterface {
     @GET("user")
     Call<UserResponse> getAllUser();
 
+    @POST("login")
+    @FormUrlEncoded
+    Call<UserResponse> loginUser(@Field("nim") String nim,
+                                  @Field("password") String password);
+
     @POST("user")
     @FormUrlEncoded
     Call<UserResponse> createUser(@Field("nama") String nama,
