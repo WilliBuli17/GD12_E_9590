@@ -1,11 +1,10 @@
-package com.example.ugd9_xxxx;
+package com.example.unguided8_xxxx;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 

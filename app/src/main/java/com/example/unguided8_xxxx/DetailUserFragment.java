@@ -1,4 +1,4 @@
-package com.example.ugd9_xxxx;
+package com.example.unguided8_xxxx;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -95,6 +95,7 @@ public class DetailUserFragment extends DialogFragment {
 
         return v;
     }
+
     private AlertDialog KonfirmasiHapus()
     {
         AlertDialog diaBox = new AlertDialog.Builder(getContext())
@@ -113,6 +114,7 @@ public class DetailUserFragment extends DialogFragment {
                             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(getContext(), ShowListUserActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
                             }
 

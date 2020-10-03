@@ -1,4 +1,4 @@
-package com.example.ugd9_xxxx;
+package com.example.unguided8_xxxx;
 
 import android.content.Intent;
 import android.os.Bundle;

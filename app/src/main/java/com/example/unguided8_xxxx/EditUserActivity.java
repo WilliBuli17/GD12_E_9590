@@ -1,4 +1,4 @@
-package com.example.ugd9_xxxx;
+package com.example.unguided8_xxxx;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -72,17 +72,12 @@ public class EditUserActivity extends AppCompatActivity {
 
         etNama.setText(sName);
         etNim.setText(sNim);
+        exposedDropdownProdi.setText(sProdi);
+        exposedDropdownFakultas.setText(sFakultas);
 
         ArrayAdapter<String> adapterProdi = new ArrayAdapter<>(Objects.requireNonNull(this), R.layout.list_item,
                 R.id.item_list, saProdi);
         exposedDropdownProdi.setAdapter(adapterProdi);
-
-
-        for (int j = 0; j < saProdi.length; j++) {
-            if(saProdi[j]==sProdi){
-                exposedDropdownProdi.setText("hapie");
-            }
-        }
 
         exposedDropdownProdi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -94,11 +89,6 @@ public class EditUserActivity extends AppCompatActivity {
         ArrayAdapter<String> adapterFakultas = new ArrayAdapter<>(Objects.requireNonNull(this), R.layout.list_item, R.id.item_list, saFakultas);
         exposedDropdownFakultas.setAdapter(adapterFakultas);
 
-        for (int j = 0; j < saFakultas.length; j++) {
-            if(saFakultas[j]==sFakultas){
-                exposedDropdownFakultas.setText("hapie");
-            }
-        }
 
         exposedDropdownFakultas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -185,8 +175,8 @@ public class EditUserActivity extends AppCompatActivity {
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 Toast.makeText(EditUserActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
-                onBackPressed();
                 Intent i = new Intent(EditUserActivity.this, ShowListUserActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
 

@@ -1,4 +1,4 @@
-package com.example.ugd9_xxxx;
+package com.example.unguided8_xxxx;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -143,7 +143,7 @@ public class CreateUserActivity extends AppCompatActivity {
         add.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                Toast.makeText(CreateUserActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateUserActivity.this, "Berhasil menambah user", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 onBackPressed();
             }

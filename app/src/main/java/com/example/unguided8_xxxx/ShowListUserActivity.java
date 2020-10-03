@@ -1,4 +1,4 @@
-package com.example.ugd9_xxxx;
+package com.example.unguided8_xxxx;
 
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +56,14 @@ public class ShowListUserActivity extends AppCompatActivity {
                 loadUser();
             }
         });
+    }
+
+    @Override
+    public void onResume()
+    {
+        swipeRefresh.setRefreshing(true);
+        loadUser();
+        super.onResume();
     }
 
     public void loadUser(){
