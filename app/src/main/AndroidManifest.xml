@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.unguided8_xxxx.UserProfileActivity"></activity>
-        <activity android:name="com.example.unguided8_xxxx.LoginActivity">
+        <activity android:name="com.example.unguided8_xxxx.UnitTest.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
